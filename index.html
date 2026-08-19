@@ -68,6 +68,44 @@
 
   </div>
 
+  <script src="question.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+        <button id="reset-btn" class="danger-btn" type="button" onclick="confirmResetQuiz()">Reset Quiz</button>
+        
+        <div class="nav-actions">
+          <button id="prev-btn" class="secondary-btn" type="button" onclick="prevQuestion()">Previous</button>
+          <button id="next-btn" class="primary-btn" type="button" onclick="nextQuestion()">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Checkpoint View -->
+    <div id="checkpoint-view" class="results-screen hidden">
+      <h2>🎉 Checkpoint Reached!</h2>
+      <p id="checkpoint-text" style="color: var(--text-muted); margin: 16px 0;"></p>
+      
+      <div class="results-actions">
+        <button class="secondary-btn" type="button" onclick="repeatCurrentBatch()">🔁 Redo Same 50 Questions</button>
+        <button class="primary-btn" type="button" onclick="continueToNextBatch()">➡️ Continue to Next 50 Questions</button>
+      </div>
+    </div>
+
+    <!-- 3. Final Results View -->
+    <div id="results-view" class="results-screen hidden">
+      <h2>Quiz Completed!</h2>
+      <div id="final-score" class="results-score">0%</div>
+      <p id="results-summary"></p>
+      
+      <div class="results-actions">
+        <button id="retry-missed-btn" class="secondary-btn" type="button" onclick="retryMissedQuestions()">Retry Missed Questions</button>
+        <button class="primary-btn" type="button" onclick="restartFullQuiz()">Restart Full Quiz</button>
+      </div>
+    </div>
+
+  </div>
+
   <script src="questions.js"></script>
   <script src="script.js"></script>
 </body>
