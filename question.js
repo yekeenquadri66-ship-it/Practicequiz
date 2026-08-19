@@ -1,39 +1,1020 @@
 const originalQuestions = [
   {
-    q: "The primary role of an (OS) operating system is to:",
-    opts: ["Compile high-level programs", "Manage hardware and software resources", "Design computer circuits", "Execute only application software"],
+    q: "In linked allocation, each disk block contains a pointer to:",
+    opts: ["The directory", "The next block of the file", "The parent block", "The index block"],
     ans: 1
   },
   {
-    q: "An operating system acts as an interface between:",
-    opts: ["Hardware and electricity", "User and computer hardware", "CPU and RAM only", "Application and compiler"],
-    ans: 1
-  },
-  {
-    q: "Which of the following is NOT a core function of an operating system?",
-    opts: ["Process management", "Memory management", "Web page design", "File system management"],
+    q: "A key disadvantage of linked allocation is:",
+    opts: ["External fragmentation", "Slow sequential access", "No direct access support", "Inability to grow files"],
     ans: 2
   },
   {
-    q: "The component of the operating system that decides which process runs next is called:",
-    opts: ["Loader", "Scheduler", "Compiler", "Assembler"],
+    q: "Indexed allocation solves external fragmentation by:",
+    opts: ["Using contiguous blocks", "Bringing all pointers into an index block", "Eliminating pointers", "Compacting memory"],
     ans: 1
   },
   {
-    q: "Resource allocation in an operating system involves managing:",
-    opts: ["Only CPU time", "Only memory", "CPU, memory, and I/O devices", "Only disk storage"],
-    ans: 2
-  },
-  {
-    q: "Which of the following best describes multitasking?",
-    opts: ["Running multiple operating systems simultaneously", "Executing one task at a time", "Running multiple processes seemingly at the same time", "Using multiple keyboards"],
-    ans: 2
-  },
-  {
-    q: "The kernel of an operating system is responsible for:",
-    opts: ["Word processing", "Core system operations", "Internet browsing", "Game execution"],
+    q: "An index block in indexed allocation contains:",
+    opts: ["Actual data records", "Pointers to all file blocks", "User permissions", "File creation dates"],
     ans: 1
   },
+  {
+    q: "In UNIX file systems, inode pointer structure uses:",
+    opts: ["Contiguous allocation only", "Direct, single-indirect, double-indirect, and triple-indirect pointers", "Linked blocks only", "Sequential indices"],
+    ans: 1
+  },
+  {
+    q: "Free-space management techniques include:",
+    opts: ["Paging and segmentation", "Bit vector, linked list, and grouping", "FCFS and Round Robin", "First-fit and best-fit"],
+    ans: 1
+  },
+  {
+    q: "A bit vector uses 1 bit for each block on disk to indicate:",
+    opts: ["Block read status", "Block allocation state (free or allocated)", "User owner ID", "File extension"],
+    ans: 1
+  },
+  {
+    q: "Which file allocation method suffers from high seek time when accessing random blocks?",
+    opts: ["Indexed allocation", "Contiguous allocation", "Linked allocation", "Multi-level indexing"],
+    ans: 2
+  },
+  {
+    q: "Directory implementation using a hash table provides:",
+    opts: ["Slow search time", "Fast lookup time", "No collisions", "Fixed length storage only"],
+    ans: 1
+  },
+  {
+    q: "FAT (File Allocation Table) is a variation of:",
+    opts: ["Contiguous allocation", "Linked allocation", "Indexed allocation", "Segmented allocation"],
+    ans: 1
+  },
+  {
+    q: "In FAT file systems, the pointers are stored in:",
+    opts: ["The file header", "A centralized table at the beginning of the volume", "Inside each data block", "The inode structure"],
+    ans: 1
+  },
+  {
+    q: "The main advantage of FAT over pure linked allocation is:",
+    opts: ["Faster random access by caching the table", "Elimination of file size limits", "No external fragmentation", "Integrated user permissions"],
+    ans: 0
+  },
+  {
+    q: "Free space management using linked lists requires:",
+    opts: ["Keeping a pointer to the first free block", "A huge memory overhead", "A bit for every disk sector", "Compaction every minute"],
+    ans: 0
+  },
+  {
+    q: "File system consistency checks are performed by utilities such as:",
+    opts: ["fsck or chkdsk", "top or htop", "gcc or clang", "ping or traceroute"],
+    ans: 0
+  },
+  {
+    q: "Virtual File System (VFS) provides:",
+    opts: ["A physical hard drive interface", "An abstraction layer allowing different file systems to coexist", "Automatic file backup", "Disk defragmentation"],
+    ans: 1
+  },
+  {
+    q: "Disk scheduling algorithms aim to minimize:",
+    opts: ["CPU utilization", "Memory usage", "Seek time and access latency", "Page fault rate"],
+    ans: 2
+  },
+  {
+    q: "Seek time is defined as the time required to:",
+    opts: ["Rotate the disk sector under the read/write head", "Move the disk arm to the desired cylinder", "Transfer data from disk to main memory", "Format the magnetic platter"],
+    ans: 1
+  },
+  {
+    q: "Rotational latency is the time taken for:",
+    opts: ["The disk arm to move to a cylinder", "The target sector to rotate beneath the read/write head", "Data to flow through the controller", "The OS to issue an I/O request"],
+    ans: 1
+  },
+  {
+    q: "In FCFS disk scheduling, requests are serviced:",
+    opts: ["By nearest cylinder first", "In the order they arrive", "By shortest track distance", "In alternating directions"],
+    ans: 1
+  },
+  {
+    q: "SSTF (Shortest Seek Time First) selects the request that:",
+    opts: ["Arrived first", "Is closest to the current head position", "Is at the edge of the platter", "Requires minimum rotation"],
+    ans: 1
+  },
+  {
+    q: "A major drawback of SSTF disk scheduling is:",
+    opts: ["High head travel distance", "Possibility of starvation for distant requests", "Complex algorithm design", "Excessive rotational delay"],
+    ans: 1
+  },
+  {
+    q: "The SCAN disk scheduling algorithm is also known as the:",
+    opts: ["Elevator algorithm", "First-in First-out algorithm", "Circular algorithm", "Shortest job algorithm"],
+    ans: 0
+  },
+  {
+    q: "In SCAN scheduling, the read/write head:",
+    opts: ["Moves randomly across the disk", "Moves continuously back and forth from one end of the disk to the other", "Serves requests only in one direction and jumps back to start", "Stops servicing requests when idle"],
+    ans: 1
+  },
+  {
+    q: "C-SCAN (Circular SCAN) scheduling differs from SCAN because it:",
+    opts: ["Services requests in both directions", "Services requests only when moving in one direction, returning to start immediately", "Uses shortest seek time criteria", "Does not move to disk edges"],
+    ans: 1
+  },
+  {
+    q: "LOOK scheduling differs from SCAN because the head:",
+    opts: ["Goes all the way to the disk edge every time", "Only goes as far as the last request in the current direction", "Moves in a circular pattern", "Services requests out of order"],
+    ans: 1
+  },
+  {
+    q: "C-LOOK scheduling is a variation of C-SCAN where the head:",
+    opts: ["Reaches the absolute end of the disk platter", "Reverses direction at the outermost cylinder", "Only moves as far as the last request before returning", "Processes requests randomly"],
+    ans: 2
+  },
+  {
+    q: "Disk transfer rate is measured as:",
+    opts: ["Time taken to move the arm", "Amount of data delivered per unit time from disk to memory", "Number of rotations per minute", "Frequency of disk interrupts"],
+    ans: 1
+  },
+  {
+    q: "RAID stands for:",
+    opts: ["Random Access Independent Disks", "Redundant Array of Independent Disks", "Real-time Array of Integrated Devices", "Rapid Access Internal Drive"],
+    ans: 1
+  },
+  {
+    q: "RAID Level 0 provides:",
+    opts: ["Mirroring only", "Striping without redundancy", "Parity check only", "Dual redundancy"],
+    ans: 1
+  },
+  {
+    q: "RAID Level 1 provides data redundancy through:",
+    opts: ["Bit-level striping", "Block-level striping with parity", "Disk mirroring", "Hamming code error correction"],
+    ans: 2
+  },
+  {
+    q: "RAID Level 5 distributes parity across:",
+    opts: ["A single dedicated parity disk", "All member disks in the array", "Only two secondary disks", "None of the disks"],
+    ans: 1
+  },
+  {
+    q: "Direct Memory Access (DMA) allows I/O devices to:",
+    opts: ["Bypass the operating system completely", "Transfer data directly to/from main memory without continuous CPU intervention", "Increase CPU clock speed", "Format hard drives dynamically"],
+    ans: 1
+  },
+  {
+    q: "An interrupt-driven I/O cycle starts when:",
+    opts: ["The CPU continuously polls the device", "The device controller signals the CPU that data is ready", "Memory is fully cleared", "The process enters the terminated state"],
+    ans: 1
+  },
+  {
+    q: "Polling I/O is also referred to as:",
+    opts: ["Programmed I/O with busy waiting", "Interrupt-driven I/O", "Direct memory access", "Asynchronous transfer"],
+    ans: 0
+  },
+  {
+    q: "A device driver acts as an interface between:",
+    opts: ["Application software and the compiler", "The OS subsystem and specific hardware controllers", "RAM and virtual memory", "User login screens and kernel"],
+    ans: 1
+  },
+  {
+    q: "Character stream devices process data:",
+    opts: ["In fixed-size blocks of bytes", "Byte by byte", "In full disk tracks", "Only through DMA"],
+    ans: 1
+  },
+  {
+    q: "Block devices store data in:",
+    opts: ["Continuous single-byte streams", "Fixed-size, individually addressable blocks", "Unstructured strings", "Variable-length registers"],
+    ans: 1
+  },
+  {
+    q: "Spooling (Simultaneous Peripheral Operations On-Line) is commonly used for:",
+    opts: ["Managing mouse input", "Managing shared output devices like printers", "Accelerating RAM speed", "Page table translation"],
+    ans: 1
+  },
+  {
+    q: "A block device driver manages access to devices like:",
+    opts: ["Keyboards and serial ports", "Hard drives and SSDs", "Mice and touchpads", "Microphones"],
+    ans: 1
+  },
+  {
+    q: "I/O buffering is used to:",
+    opts: ["Cope with speed mismatches between producer and consumer of data", "Increase disk capacity", "Eliminate hardware interrupts", "Prevent deadlocks in processes"],
+    ans: 0
+  },
+  {
+    q: "Double buffering improves performance by:",
+    opts: ["Allocating two CPUs to I/O tasks", "Allowing one buffer to fill while the other is being processed", "Doubling hard drive RPM", "Caching page tables"],
+    ans: 1
+  },
+  {
+    q: "An asynchronous I/O operation:",
+    opts: ["Blocks the execution of the calling process until completed", "Allows the calling process to continue while I/O completes in background", "Requires polling in a loop", "Does not trigger interrupts"],
+    ans: 1
+  },
+  {
+    q: "Which I/O communication technique consumes the most CPU cycles during transfer?",
+    opts: ["DMA", "Interrupt-driven I/O", "Programmed I/O (polling)", "Spooling"],
+    ans: 2
+  },
+  {
+    q: "A memory-mapped I/O structure maps device registers to:",
+    opts: ["Dedicated CPU I/O ports", "The system's main physical address space", "Disk sectors", "Virtual memory swap spaces"],
+    ans: 1
+  },
+  {
+    q: "The main benefit of using a buffer cache in the I/O system is:",
+    opts: ["Reducing magnetic platter degradation", "Avoid reading from disk repeatedly for recently used data", "Increasing network throughput", "Executing processes without memory"],
+    ans: 1
+  },
+  {
+    q: "In operating system security, authentication verifies:",
+    opts: ["What actions a user is allowed to perform", "The identity of the user accessing the system", "The memory addresses of processes", "The checksum of files"],
+    ans: 1
+  },
+  {
+    q: "Authorization in operating systems determines:",
+    opts: ["User identity", "User access rights and resource privileges", "Network latency", "CPU scheduling order"],
+    ans: 1
+  },
+  {
+    q: "The Principle of Least Privilege states that:",
+    opts: ["All users should have administrator rights", "Users and processes should be granted only minimum necessary permissions", "Security should be turned off for high speed", "Kernel modules must have root access"],
+    ans: 1
+  },
+  {
+    q: "A Trojan horse is a type of malware that:",
+    opts: ["Replicates autonomously through networks", "Disguises itself as legitimate software to deceive users", "Encrypts files for ransom", "Attaches to BIOS chips directly"],
+    ans: 1
+  },
+  {
+    q: "A computer worm differs from a virus because a worm:",
+    opts: ["Requires a host executable file to spread", "Spreads autonomously across networks without human action or host files", "Only affects hardware components", "Never uses bandwidth"],
+    ans: 1
+  },
+  {
+    q: "Buffer overflow attacks exploit software vulnerabilities by:",
+    opts: ["Reading empty memory registers", "Writing data past the end of an allocated buffer to overwrite adjacent memory", "Deleting operating system files", "Slowing down CPU frequency"],
+    ans: 1
+  },
+  {
+    q: "An Access Control Matrix defines permissions between:",
+    opts: ["CPUs and processes", "Domains/Users (subjects) and Objects (resources)", "Pages and frames", "Interrupts and handlers"],
+    ans: 1
+  },
+  {
+    q: "In Role-Based Access Control (RBAC), access permissions are assigned based on:",
+    opts: ["Individual user preference", "User job duties and roles within an organization", "File creation timestamp", "CPU utilization levels"],
+    ans: 1
+  },
+  {
+    q: "A denial-of-service (DoS) attack aims to:",
+    opts: ["Steal sensitive passwords", "Make system or network resources unavailable to intended users", "Modify file contents silently", "Install keyloggers"],
+    ans: 1
+  },
+  {
+    q: "In symmetric encryption:",
+    opts: ["Two different keys are used for encryption and decryption", "The same secret key is used for both encryption and decryption", "No keys are required", "Only public keys are involved"],
+    ans: 1
+  },
+  {
+    q: "Asymmetric encryption uses:",
+    opts: ["A private key and a public key pair", "A single shared secret key", "Only hash functions", "No mathematical calculations"],
+    ans: 0
+  },
+  {
+    q: "A digital signature provides:",
+    opts: ["Data confidentiality only", "Authenticity, integrity, and non-repudiation", "Automatic virus scanning", "Fast file compression"],
+    ans: 1
+  },
+  {
+    q: "In an Access Control List (ACL), permissions are associated with:",
+    opts: ["Each individual object (file/resource)", "Each user profile domain", "Each process ID", "The operating system kernel"],
+    ans: 0
+  },
+  {
+    q: "A Capability List associates permissions with:",
+    opts: ["The resource object", "The domain or user subject", "The hard drive partition", "The network card"],
+    ans: 1
+  },
+  {
+    q: "Ransomware is malicious software designed to:",
+    opts: ["Speed up internet connection", "Lock or encrypt victim files and demand payment for decryption", "Monitor hardware temperature", "Perform disk scheduling"],
+    ans: 1
+  },
+  {
+    q: "A hypervisor (or Virtual Machine Monitor) is software that:",
+    opts: ["Compiles C programs into machine code", "Creates and runs virtual machines on underlying hardware", "Manages printer spooling queues", "Formats hard disks"],
+    ans: 1
+  },
+  {
+    q: "Type 1 hypervisors run:",
+    opts: ["Inside a host operating system like Windows", "Directly on bare-metal hardware", "As a web browser extension", "Inside a docker container"],
+    ans: 1
+  },
+  {
+    q: "Type 2 hypervisors run:",
+    opts: ["Directly on physical server hardware", "On top of an existing host operating system", "Without any CPU involvement", "Only on mobile phones"],
+    ans: 1
+  },
+  {
+    q: "An example of a Type 1 hypervisor is:",
+    opts: ["Oracle VirtualBox", "VMware ESXi", "VMware Workstation", "QEMU user-mode"],
+    ans: 1
+  },
+  {
+    q: "An example of a Type 2 hypervisor is:",
+    opts: ["VMware ESXi", "Microsoft Hyper-V Core", "Oracle VirtualBox", "Citrix XenServer"],
+    ans: 2
+  },
+  {
+    q: "Container-based virtualization (like Docker) differs from full virtualization because containers:",
+    opts: ["Emulate full hardware and run separate guest OS kernels", "Share the host OS kernel and isolate user space", "Require Type 1 hypervisors", "Do not support process execution"],
+    ans: 1
+  },
+  {
+    q: "Full virtualization requires that:",
+    opts: ["Guest OS must be modified to run", "Unmodified guest OS can run as if on real hardware", "No hypervisor is used", "Hardware support is absent"],
+    ans: 1
+  },
+  {
+    q: "Paravirtualization improves performance by:",
+    opts: ["Modifying guest OS to communicate directly with hypervisor via hypercalls", "Running without CPU virtual support", "Eliminating memory allocation", "Bypassing hardware security"],
+    ans: 0
+  },
+  {
+    q: "Hardware-assisted virtualization utilizes special CPU extensions such as:",
+    opts: ["Intel VT-x and AMD-V", "ARM Cortex-M0", "TCP/IP offload", "PCI Express 4.0"],
+    ans: 0
+  },
+  {
+    q: "In cloud computing, Infrastructure as a Service (IaaS) provides:",
+    opts: ["Application software ready to use", "Virtual machines, storage, and networking hardware resources", "Database design tools only", "Web page themes"],
+    ans: 1
+  },
+  {
+    q: "Platform as a Service (PaaS) provides developers with:",
+    opts: ["Bare-metal servers only", "An environment for building, deploying, and running applications", "Only email services", "Physical networking cables"],
+    ans: 1
+  },
+  {
+    q: "Software as a Service (SaaS) delivers:",
+    opts: ["Virtual machine hypervisors", "Complete applications over the internet to end users", "Operating system kernels", "Storage area networks"],
+    ans: 1
+  },
+  {
+    q: "Live migration in virtualized environments allows:",
+    opts: ["Moving a running VM from one physical host to another with minimal downtime", "Deleting a VM without losing data", "Converting a container into a hypervisor", "Upgrading host RAM automatically"],
+    ans: 0
+  },
+  {
+    q: "Virtual Machine Sprawl refers to:",
+    opts: ["VMs consuming too much network traffic", "Uncontrolled proliferation of unused or unmanaged VMs on a network", "Hardware failure of hypervisors", "Paging in guest operating systems"],
+    ans: 1
+  },
+  {
+    q: "A snapshot in virtualization captures:",
+    opts: ["A photo of the server rack", "The exact state (memory, storage, settings) of a VM at a specific point in time", "Only the log files of the hypervisor", "The network MAC address only"],
+    ans: 1
+  },
+  {
+    q: "A system call is initiated by a user program using a:",
+    opts: ["Hardware trap or software interrupt instruction", "Standard loop", "Global variable definition", "HTML tag"],
+    ans: 0
+  },
+  {
+    q: "The CPU transitions from User Mode to Kernel Mode via:",
+    opts: ["Memory compaction", "A system call or interrupt", "A context switch delay", "Process termination"],
+    ans: 1
+  },
+  {
+    q: "Kernel mode differs from user mode because kernel mode has:",
+    opts: ["Restricted access to memory", "Unrestricted access to hardware and all system memory", "No privilege rights", "Slower CPU execution speed"],
+    ans: 1
+  },
+  {
+    q: "Dual-mode operation in CPUs protects the system by using a hardware:",
+    opts: ["Mode bit", "Page fault counter", "Disk scheduler", "TLB miss flag"],
+    ans: 0
+  },
+  {
+    q: "Privileged instructions can only be executed in:",
+    opts: ["User mode", "Kernel mode", "Suspended mode", "Interactive mode"],
+    ans: 1
+  },
+  {
+    q: "Which of the following instructions is PRIVILEGED?",
+    opts: ["Add two registers", "Disable interrupts", "Read a local variable", "Perform bitwise AND"],
+    ans: 1
+  },
+  {
+    q: "A monolithic kernel architecture:",
+    opts: ["Runs all OS services inside the kernel space in a single binary", "Runs OS services in user space modules", "Does not support file systems", "Is used only in embedded microcontrollers"],
+    ans: 0
+  },
+  {
+    q: "A microkernel architecture moves services like file systems and device drivers into:",
+    opts: ["Kernel space", "User space as server processes", "BIOS firmware", "Hardware controllers"],
+    ans: 1
+  },
+  {
+    q: "A major benefit of microkernels is:",
+    opts: ["Faster execution speed than monolithic kernels", "High modularity, security, and stability (failures don't crash whole OS)", "Zero message-passing overhead", "No need for CPU scheduling"],
+    ans: 1
+  },
+  {
+    q: "A major disadvantage of microkernel architecture is:",
+    opts: ["Increased performance overhead due to frequent message passing", "System crashes whenever a driver fails", "Inability to run user apps", "Lack of memory protection"],
+    ans: 0
+  },
+  {
+    q: "Loadable Kernel Modules (LKMs) allow an OS to:",
+    opts: ["Recompile the kernel every time hardware changes", "Dynamically add or remove kernel services at runtime", "Run without physical RAM", "Bypass security checks entirely"],
+    ans: 1
+  },
+  {
+    q: "In UNIX systems, the POSIX API defines:",
+    opts: ["Standard system call interfaces for portability across operating systems", "Hardware wiring rules", "Graphics rendering algorithms", "Network router protocols"],
+    ans: 0
+  },
+  {
+    q: "Which system architecture combines monolithic speed with microkernel modularity?",
+    opts: ["Batch Architecture", "Hybrid Kernel Architecture", "Layered Architecture only", "Simple Architecture"],
+    ans: 1
+  },
+  {
+    q: "Windows and macOS are built on which kernel architecture type?",
+    opts: ["Pure Microkernel", "Pure Monolithic", "Hybrid Kernel", "Batch Kernel"],
+    ans: 2
+  },
+  {
+    q: "In a layered OS structure, Layer 0 corresponds to:",
+    opts: ["User interface", "Hardware layer", "File system layer", "CPU scheduling layer"],
+    ans: 1
+  },
+  {
+    q: "An interrupt vector table stores:",
+    opts: ["Hardware device serial numbers", "Memory addresses of interrupt service routines (ISRs)", "Active process PIDs", "Paging records"],
+    ans: 1
+  },
+  {
+    q: "An interrupt that is generated by software executing an illegal instruction is called a:",
+    opts: ["Trap or Exception", "Hardware interrupt", "DMA request", "Spooling signal"],
+    ans: 0
+  },
+  {
+    q: "Maskable interrupts differ from non-maskable interrupts (NMI) because they:",
+    opts: ["Can be temporarily ignored or disabled by the CPU", "Can never be disabled", "Are generated only by user software", "Do not use the interrupt vector"],
+    ans: 0
+  },
+  {
+    q: "A timer interrupt is primarily used by the OS to:",
+    opts: ["Prevent user programs from monopolizing the CPU", "Measure network latency", "Format storage media", "Clear the L1 cache"],
+    ans: 0
+  },
+  {
+    q: "When an interrupt occurs, the CPU saves:",
+    opts: ["All files on disk", "The current execution state (registers, program counter)", "The entire main memory", "User login passwords"],
+    ans: 1
+  },
+  {
+    q: "Polling overhead occurs because:",
+    opts: ["The CPU wastes clock cycles periodically checking device flags", "Interrupts are triggered too fast", "DMA takes over memory control", "Buffers overflow"],
+    ans: 0
+  },
+  {
+    q: "In mobile operating systems, energy efficiency is achieved by using aggressive:",
+    opts: ["Disk defragmentation", "Power state management and process suspension", "Continuous CPU polling", "Static memory allocation"],
+    ans: 1
+  },
+  {
+    q: "Android OS uses which underlying kernel?",
+    opts: ["Windows NT", "Linux Kernel", "Mach Microkernel", "BSD Kernel"],
+    ans: 1
+  },
+  {
+    q: "Apple's iOS is based on which core operating system family?",
+    opts: ["Linux", "Darwin / macOS (UNIX-based)", "MS-DOS", "Android"],
+    ans: 1
+  },
+  {
+    q: "Android application execution relies on runtime environments such as:",
+    opts: ["ART (Android Runtime) / Dalvik", "JVM standard edition", "NET Common Language Runtime", "V8 Engine"],
+    ans: 0
+  },
+  {
+    q: "In real-time embedded systems, hard real-time systems require:",
+    opts: ["Deadlines to be met strictly, or total system failure occurs", "Deadlines to be met on average", "No timing constraints", "Interactive response times only"],
+    ans: 0
+  },
+  {
+    q: "In soft real-time systems:",
+    opts: ["Missing a deadline causes immediate catastrophic failure", "Missing a deadline degrades quality but does not cause system collapse", "No priority scheduling is used", "Execution time is unpredictable"],
+    ans: 1
+  },
+  {
+    q: "Rate-Monotonic Scheduling (RMS) assigns priorities based on:",
+    opts: ["Shortest task burst time", "Task period (shorter periods get higher priority)", "Arrival time of tasks", "Random selection"],
+    ans: 1
+  },
+  {
+    q: "Earliest Deadline First (EDF) scheduling is a dynamic algorithm that assigns highest priority to the task with:",
+    opts: ["Smallest period", "Closest absolute deadline", "Highest resource consumption", "Oldest creation time"],
+    ans: 1
+  },
+  {
+    q: "In Linux, process privileges are dropped using which system call family?",
+    opts: ["setuid() and setgid()", "fork() and exec()", "malloc() and free()", "chmod() and chown()"],
+    ans: 0
+  },
+  {
+    q: "In UNIX, standard output (stdout) corresponds to file descriptor number:",
+    opts: ["0", "1", "2", "3"],
+    ans: 1
+  },
+  {
+    q: "In UNIX, standard error (stderr) corresponds to file descriptor number:",
+    opts: ["0", "1", "2", "3"],
+    ans: 2
+  },
+  {
+    q: "In UNIX, standard input (stdin) corresponds to file descriptor number:",
+    opts: ["0", "1", "2", "3"],
+    ans: 0
+  },
+  {
+    q: "In operating systems, IPC stands for:",
+    opts: ["Internal Process Controller", "Inter-Process Communication", "Instruction Program Counter", "Integrated Power Circuit"],
+    ans: 1
+  },
+  {
+    q: "The two fundamental models of Inter-Process Communication are:",
+    opts: ["Paging and Segmentation", "Shared Memory and Message Passing", "FCFS and Round Robin", "Monolithic and Microkernel"],
+    ans: 1
+  },
+  {
+    q: "Shared memory IPC is generally faster than message passing because:",
+    opts: ["It requires kernel intervention for every data exchange", "Data transfers occur directly via shared RAM without system call overhead", "It uses network sockets", "It avoids synchronization issues"],
+    ans: 1
+  },
+  {
+    q: "Message passing IPC is better suited for:",
+    opts: ["Distributed networks and multi-system communication", "Single CPU shared registers", "Very large contiguous data blocks", "Zero-copy memory pipelines"],
+    ans: 0
+  },
+  {
+    q: "A named pipe (FIFO) in UNIX allows communication between:",
+    opts: ["Only parent and child processes", "Unrelated processes running on the same file system", "Processes on two different remote networks", "Kernel threads only"],
+    ans: 1
+  },
+  {
+    q: "An anonymous pipe in UNIX is created using:",
+    opts: ["pipe() system call", "mkfifo() system call", "socket() system call", "shmget() system call"],
+    ans: 0
+  },
+  {
+    q: "Socket communication enables process communication across:",
+    opts: ["Local address spaces only", "Networked systems using IP addresses and port numbers", "Single thread registries", "Disk sectors exclusively"],
+    ans: 1
+  },
+  {
+    q: "RPC stands for:",
+    opts: ["Remote Process Command", "Remote Procedure Call", "Resource Allocation Control", "Real-time Program Code"],
+    ans: 1
+  },
+  {
+    q: "Marshalling in RPC refers to:",
+    opts: ["Scheduling thread priorities", "Packaging parameters into a standard format for transmission over a network", "Allocating virtual memory frames", "Compacting fragmentation"],
+    ans: 1
+  },
+  {
+    q: "In Message Passing, direct communication requires that:",
+    opts: ["Processes explicitly name the recipient or sender", "Messages are placed in intermediate mailboxes", "Processes share identical memory addresses", "No kernel buffering exists"],
+    ans: 0
+  },
+  {
+    q: "Indirect communication in Message Passing uses:",
+    opts: ["Named processes only", "Mailboxes or ports to hold messages", "Direct register transfers", "Zero memory allocations"],
+    ans: 1
+  },
+  {
+    q: "Synchronous message passing implies that sending is:",
+    opts: ["Non-blocking", "Blocking (sender waits until message is received)", "Deferred to disk", "Unbuffered"],
+    ans: 1
+  },
+  {
+    q: "Asynchronous message passing implies that sending is:",
+    opts: ["Blocking until read", "Non-blocking (sender resumes immediately)", "Delayed by CPU scheduling", "Impossible"],
+    ans: 1
+  },
+  {
+    q: "Zero capacity buffering in message queues means:",
+    opts: ["The queue length is 0, requiring forced synchronization (rendezvous)", "Messages are dropped automatically", "Infinite messages can sit in queue", "Messages are written to disk"],
+    ans: 0
+  },
+  {
+    q: "Signal handling in UNIX is used to:",
+    opts: ["Notify a process that a specific event has occurred", "Allocate virtual memory pages", "Mount external storage", "Format swap space"],
+    ans: 0
+  },
+  {
+    q: "Which UNIX signal cannot be caught or ignored?",
+    opts: ["SIGINT", "SIGTERM", "SIGKILL", "SIGUSR1"],
+    ans: 2
+  },
+  {
+    q: "The SIGINT signal is typically generated by pressing:",
+    opts: ["Ctrl + C", "Ctrl + Z", "Ctrl + Alt + Del", "Alt + F4"],
+    ans: 0
+  },
+  {
+    q: "System thrashing can be identified by high disk activity combined with:",
+    opts: ["High CPU utilization", "Extremely low CPU utilization", "Fast execution speeds", "Zero page faults"],
+    ans: 1
+  },
+  {
+    q: "The translation buffer miss penalty refers to the time needed to:",
+    opts: ["Access the page table in RAM when TLB fails to contain the address", "Format hard drive tracks", "Context switch threads", "Reboot the kernel"],
+    ans: 0
+  },
+  {
+    q: "Slab allocation in Linux memory management is designed to:",
+    opts: ["Eliminate external fragmentation caused by frequent kernel object creation", "Replace disk scheduling algorithms", "Manage user level threads", "Perform swap space encryption"],
+    ans: 0
+  },
+  {
+    q: "A buddy system memory allocator satisfies memory requests by:",
+    opts: ["Splitting memory blocks into halves repeatedly until fit", "Allocating random memory locations", "Paging frames to disk", "Using single-byte chunks"],
+    ans: 0
+  },
+  {
+    q: "Spinlocks are synchronization locks where processes:",
+    opts: ["Sleep while waiting for lock release", "Loop continuously (busy wait) until the lock becomes available", "Terminate immediately", "Yield CPU to long-term scheduler"],
+    ans: 1
+  },
+  {
+    q: "Spinlocks are most efficient in:",
+    opts: ["Single-processor systems", "Multiprocessor systems where lock hold times are short", "High-latency network connections", "Disk I/O queues"],
+    ans: 1
+  },
+  {
+    q: "In memory-mapped files, file content is mapped directly into:",
+    opts: ["Process virtual address space", "CPU instruction registers", "I/O controller ports", "Swap space sectors"],
+    ans: 0
+  },
+  {
+    q: "Page pinning (or locking) in memory prevents:",
+    opts: ["Pages from being swapped out to disk during active I/O", "Processes from writing to variables", "Kernel execution", "Thread creation"],
+    ans: 0
+  },
+  {
+    q: "A file system block size choice affects trade-offs between:",
+    opts: ["Internal fragmentation and transfer throughput", "CPU clock speed and RAM speed", "Thread count and process count", "User count and admin permissions"],
+    ans: 0
+  },
+  {
+    q: "Larger block sizes in file systems generally lead to:",
+    opts: ["Higher transfer rates for large files but increased internal fragmentation for small files", "Zero fragmentation", "Slower disk reads", "Lower total storage capacity"],
+    ans: 0
+  },
+  {
+    q: "The dirty bit (modify bit) in a page table entry indicates whether the page has been:",
+    opts: ["Read from memory", "Written to / modified since loaded into RAM", "Swapped to secondary disk", "Corrupted by virus"],
+    ans: 1
+  },
+  {
+    q: "The valid-invalid bit in a page table entry specifies if the page is:",
+    opts: ["ReadOnly or Writeable", "Currently in the process's logical address space and physical RAM", "Encrypted or Plaintext", "Shared or Private"],
+    ans: 1
+  },
+  {
+    q: "Dynamic link libraries (DLLs / shared objects) save memory by:",
+    opts: ["Sharing a single copy of library code across multiple running processes", "Compressing files on hard disk", "Running without main RAM", "Disabling context switches"],
+    ans: 0
+  },
+  {
+    q: "Overlaying is an old technique where:",
+    opts: ["Programs manually swap portions of code into memory as needed", "Kernel code overwrites user apps", "Virtual memory is doubled", "Hardware emulates RAM"],
+    ans: 0
+  },
+  {
+    q: "Modern operating systems replaced overlays with:",
+    opts: ["Contiguous allocation", "Virtual memory and demand paging", "Batch processing", "Static partitioning"],
+    ans: 1
+  },
+  {
+    q: "The main benefit of Copy-On-Write (COW) during fork() is:",
+    opts: ["Duplicate memory pages only when a process modifies them", "Increase process priority", "Prevent child process creation", "Format swap partition"],
+    ans: 0
+  },
+  {
+    q: "In UNIX, exec() system call family replaces:",
+    opts: ["The parent process image with a new program image", "The CPU architecture", "The file system structure", "The hard disk sector map"],
+    ans: 0
+  },
+  {
+    q: "An orphan process is a child process whose parent has:",
+    opts: ["Terminated while child is still running", "Not executed wait()", "Entered deadlock state", "Been suspended"],
+    ans: 0
+  },
+  {
+    q: "In UNIX, orphan processes are adopted by:",
+    opts: ["The init process (PID 1) or systemd", "The root user domain", "Another sibling process", "The kernel scheduler queue"],
+    ans: 0
+  },
+  {
+    q: "A process state transition from Running to Ready is caused by:",
+    opts: ["I/O completion", "Time quantum expiration or preemption", "System call request", "Process error"],
+    ans: 1
+  },
+  {
+    q: "A process state transition from Waiting to Ready is caused by:",
+    opts: ["CPU scheduling decision", "I/O or event completion", "Time quantum expiration", "Process creation"],
+    ans: 1
+  },
+  {
+    q: "In CPU scheduling, Convoy Effect occurs in FCFS when:",
+    opts: ["Short processes wait behind a long CPU-bound process", "Many small processes block large processes", "CPU remains continuously idle", "Preemption triggers high overhead"],
+    ans: 0
+  },
+  {
+    q: "A priority ceiling protocol is used in real-time systems to solve:",
+    opts: ["Thrashing", "Priority Inversion", "External fragmentation", "Deadlock detection"],
+    ans: 1
+  },
+  {
+    q: "Starvation in scheduling can be solved by:",
+    opts: ["Increasing time quantum", "Aging (gradually increasing process priority over time)", "Reducing RAM size", "Disabling interrupts"],
+    ans: 1
+  },
+  {
+    q: "A thread pool model improves performance by:",
+    opts: ["Creating a fixed set of reusable threads at startup", "Spawning infinite new threads", "Deleting user threads", "Disabling multi-core support"],
+    ans: 0
+  },
+  {
+    q: "Which CPU scheduling algorithm is non-preemptive by definition?",
+    opts: ["Round Robin", "FCFS", "SRTF", "Preemptive Priority"],
+    ans: 1
+  },
+  {
+    q: "A major drawback of Round Robin with a very small time quantum is:",
+    opts: ["High context-switching overhead", "Convoy effect", "Starvation of short jobs", "Deadlock occurrence"],
+    ans: 0
+  },
+  {
+    q: "If Round Robin time quantum is extremely large, it behaves like:",
+    opts: ["Shortest Job First", "FCFS", "Priority Scheduling", "Multilevel Feedback Queue"],
+    ans: 1
+  },
+  {
+    q: "Multilevel Queue Scheduling partitions the ready queue into:",
+    opts: ["Separate queues based on process type/priority", "Contiguous RAM spaces", "Virtual page frames", "Disk sectors"],
+    ans: 0
+  },
+  {
+    q: "Multilevel Feedback Queue scheduling allows processes to:",
+    opts: ["Move between different priority queues based on execution history", "Remain in a fixed queue forever", "Bypass kernel checks", "Avoid memory allocation"],
+    ans: 0
+  },
+  {
+    q: "A critical section is a piece of code that accesses:",
+    opts: ["Private local variables only", "Shared resources that must not be accessed concurrently by multiple processes", "Read-only instructions", "BIOS firmware"],
+    ans: 1
+  },
+  {
+    q: "Peterson’s Solution is a classic algorithm that satisfies mutual exclusion for:",
+    opts: ["Two processes", "Infinite processes", "Hardware controllers", "Distributed systems"],
+    ans: 0
+  },
+  {
+    q: "Peterson’s Solution assumes that execution instructions are:",
+    opts: ["Atomic and execute without hardware reordering", "Distributed across networks", "Delayed by disk arm travel", "Multi-threaded natively"],
+    ans: 0
+  },
+  {
+    q: "An atomic hardware instruction completes:",
+    opts: ["As a single indivisible unit without interruption", "In multiple context switches", "Only after page fault", "By disk controller"],
+    ans: 0
+  },
+  {
+    q: "Counting semaphores can be initialized to:",
+    opts: ["Only 0 and 1", "Any non-negative integer representing available resource count", "Negative numbers only", "Floating point decimals"],
+    ans: 1
+  },
+  {
+    q: "When a process calls wait() on a counting semaphore with value 0, it:",
+    opts: ["Increments the value", "Blocks until the value becomes greater than 0", "Terminates immediately", "Ignores the signal"],
+    ans: 1
+  },
+  {
+    q: "When a process calls signal() on a semaphore, it:",
+    opts: ["Decrements the semaphore value", "Increments the semaphore value and unblocks a waiting process if any", "Locks the critical section", "Triggers a page fault"],
+    ans: 1
+  },
+  {
+    q: "The Dining Philosophers problem illustrates challenges in:",
+    opts: ["Memory allocation strategies", "Deadlock and starvation in concurrent resource sharing", "File system indexing", "Disk sector alignment"],
+    ans: 1
+  },
+  {
+    q: "The Readers-Writers problem deals with synchronizing access where:",
+    opts: ["Multiple readers can read concurrently, but writers require exclusive access", "Writers share memory without locks", "Readers must block other readers", "No locks are used"],
+    ans: 0
+  },
+  {
+    q: "Deadlock Detection algorithms for multiple instances of resources use:",
+    opts: ["Banker's Algorithm variants with allocation/request matrices", "First-fit search", "Elevator algorithm", "LRU page replacements"],
+    ans: 0
+  },
+  {
+    q: "Ignoring the deadlock problem completely and assuming it won't happen is called:",
+    opts: ["Ostrich Algorithm", "Banker's Algorithm", "Peterson's Algorithm", "SCAN Algorithm"],
+    ans: 0
+  },
+  {
+    q: "The Ostrich Algorithm is used by general-purpose OSs because:",
+    opts: ["Deadlocks are rare and prevention costs are high relative to recovery", "Deadlocks are impossible in modern software", "It mathematically proves safety", "It requires zero RAM"],
+    ans: 0
+  },
+  {
+    q: "Resource Allocation Graphs (RAG) contain cycles:",
+    opts: ["Which ALWAYS imply deadlock if resources have single instances", "Which NEVER imply deadlock", "Which only happen in virtual memory", "Which stop CPU clocks"],
+    ans: 0
+  },
+  {
+    q: "If a Resource Allocation Graph contains a cycle and resources have multiple instances, deadlock:",
+    opts: ["MAY exist, but is not guaranteed", "Definitely exists", "Is completely impossible", "Triggers disk format"],
+    ans: 0
+  },
+  {
+    q: "An advantage of strict deadlock prevention over avoidance is:",
+    opts: ["It requires no runtime information about future process requests", "It leads to maximum CPU utilization", "It uses no system memory", "It supports infinite processes"],
+    ans: 0
+  },
+  {
+    q: "Memory paging eliminates external fragmentation by:",
+    opts: ["Dividing memory into fixed physical frames and logical pages", "Compacting disk space", "Swapping kernel files", "Using dynamic variable partitions"],
+    ans: 0
+  },
+  {
+    q: "A page table entry (PTE) maps:",
+    opts: ["Logical page number to physical frame number", "Disk cylinder to sector number", "Process ID to file path", "CPU register to memory bus"],
+    ans: 0
+  },
+  {
+    q: "In a system with 32-bit logical addresses and 4 KB page size, the offset requires:",
+    opts: ["10 bits", "12 bits", "16 bits", "20 bits"],
+    ans: 1
+  },
+  {
+    q: "In a system with 32-bit logical addresses and 4 KB page size, the page number requires:",
+    opts: ["12 bits", "20 bits", "24 bits", "32 bits"],
+    ans: 1
+  },
+  {
+    q: "An Inverted Page Table reduces page table size by maintaining:",
+    opts: ["One entry for each physical frame in memory rather than each logical page", "One entry for all files", "Multiple tables per process", "No entries at all"],
+    ans: 0
+  },
+  {
+    q: "Hashed Page Tables are commonly used in systems with address spaces larger than:",
+    opts: ["8-bit", "16-bit", "32-bit", "128-bit"],
+    ans: 2
+  },
+  {
+    q: "Segmentation reflects which view of main memory?",
+    opts: ["User/programmer view", "Hardware cylinder view", "Network packet view", "Binary bit view"],
+    ans: 0
+  },
+  {
+    q: "A segment limit specifies:",
+    opts: ["The length of the segment", "The starting physical address of the segment", "The file owner permissions", "The CPU priority level"],
+    ans: 0
+  },
+  {
+    q: "A segment base specifies:",
+    opts: ["The starting physical address of the segment in memory", "The end offset of the segment", "The process PID", "The page fault rate"],
+    ans: 0
+  },
+  {
+    q: "If a segment offset exceeds the segment limit, the operating system raises a:",
+    opts: ["Segmentation Fault / Trap", "Page Fault", "Disk Error", "TLB Miss"],
+    ans: 0
+  },
+  {
+    q: "Swap space is a section of secondary storage reserved for:",
+    opts: ["Holding memory pages removed from physical RAM", "Installing new operating system files", "Storing permanent video downloads", "Buffering printer queues"],
+    ans: 0
+  },
+  {
+    q: "A page fault handler is executed by the OS when:",
+    opts: ["A referenced page is marked invalid/not present in RAM", "A program finishes normally", "Disk speed drops", "Keyboard input arrives"],
+    ans: 0
+  },
+  {
+    q: "The sequence of steps in handling a page fault includes:",
+    opts: ["Trap to OS -> Save state -> Locate page on disk -> Read page into free frame -> Update page table -> Restart instruction", "Restart system -> Clear RAM -> Recompile code", "Delete process -> Clear swap -> Format disk", "Ignore trap -> Continue execution"],
+    ans: 0
+  },
+  {
+    q: "Pure Demand Paging starts executing a process with:",
+    opts: ["Zero pages in physical RAM", "All pages pre-loaded into physical RAM", "Half of the pages in RAM", "Pages stored in CPU registers"],
+    ans: 0
+  },
+  {
+    q: "Belady’s Anomaly states that for some page replacement algorithms, increasing frame count:",
+    opts: ["Increases the number of page faults", "Decreases the number of page faults", "Keeps page faults constant", "Eliminates virtual memory"],
+    ans: 0
+  },
+  {
+    q: "Which page replacement algorithm is immune to Belady's Anomaly?",
+    opts: ["FIFO", "LRU (Least Recently Used)", "Second Chance", "Clock Algorithm"],
+    ans: 1
+  },
+  {
+    q: "The Clock Page Replacement Algorithm is an efficient approximation of:",
+    opts: ["Optimal Algorithm", "LRU Algorithm", "FIFO Algorithm", "MFU Algorithm"],
+    ans: 1
+  },
+  {
+    q: "In the Second Chance page replacement algorithm, if a page's reference bit is 1, the OS:",
+    opts: ["Replaces it immediately", "Clears the bit to 0 and gives it a second chance", "Swaps it to secondary storage", "Terminates its parent process"],
+    ans: 1
+  },
+  {
+    q: "Equal allocation of frames divides free memory:",
+    opts: ["Equally among all processes regardless of size", "Proportionally based on process size", "Based on thread priority", "Randomly"],
+    ans: 0
+  },
+  {
+    q: "Proportional frame allocation divides available frames based on:",
+    opts: ["The size of each process relative to total memory requirements", "Arrival time of processes", "Process execution time", "User permissions"],
+    ans: 0
+  },
+  {
+    q: "Global page replacement allows a process to select a replacement frame from:",
+    opts: ["The set of all frames in the system, even if allocated to other processes", "Only its own allocated set of frames", "Disk storage directly", "The TLB buffer only"],
+    ans: 0
+  },
+  {
+    q: "Local page replacement limits frame selection to:",
+    opts: ["The process's own allocated frames", "Any frame across the system", "Kernel memory frames", "Unpartitioned sectors"],
+    ans: 0
+  },
+  {
+    q: "Global page replacement can cause one process to suffer page faults due to:",
+    opts: ["Paging behavior of another process", "Hardware interrupts", "Disk formatting", "Process creation delay"],
+    ans: 0
+  },
+  {
+    q: "A file control block (FCB) contains:",
+    opts: ["File permissions, ownership, size, and location of data blocks", "User passwords", "Compiled machine code", "CPU register states"],
+    ans: 0
+  },
+  {
+    q: "In UNIX, a hard link creates:",
+    opts: ["A new directory entry pointing to an existing inode", "A file containing a text path to another file", "A duplicate copy of file content", "A shortcut executable"],
+    ans: 0
+  },
+  {
+    q: "A symbolic (soft) link creates:",
+    opts: ["A file that contains the path string pointing to another target file", "A direct pointer to the raw physical inode", "A new process image", "A hard drive sector lock"],
+    ans: 0
+  },
+  {
+    q: "Deleting the original target file breaks which type of link?",
+    opts: ["Symbolic (soft) link", "Hard link", "Both symbolic and hard link", "Neither link"],
+    ans: 0
+  },
+  {
+    q: "Mounting a file system attaches its root directory to:",
+    opts: ["A specified directory (mount point) in an existing file system tree", "The CPU register space", "A virtual page frame", "A swap partition"],
+    ans: 0
+  },
+  {
+    q: "Network File System (NFS) allows a client system to access files across a network as if they were:",
+    opts: ["Local storage files", "Web search results", "Read-only database records", "System calls"],
+    ans: 0
+  },
+  {
+    q: "In disk layout, a boot sector (or MBR/GPT) contains code to:",
+    opts: ["Load and execute the operating system kernel during startup", "Manage printer queues", "Compile application code", "Perform garbage collection"],
+    ans: 0
+  },
+  {
+    q: "Disk defragmentation re-organizes data blocks to:",
+    opts: ["Store file pieces in contiguous sectors for faster read speed", "Increase total physical disk capacity", "Remove viruses", "Update user access permissions"],
+    ans: 0
+  },
+  {
+    q: "An operating system shell is best described as:",
+    opts: ["A user interface (command-line or GUI) that interprets user commands", "The low-level device driver layer", "The physical computer casing", "The CPU control unit"],
+    ans: 0
+  },
+  {
+    q: "Which operating system structure uses a message-passing mechanism as its primary core communication?",
+    opts: ["Microkernel", "Monolithic Kernel", "Layered Kernel", "Flat Architecture"],
+    ans: 0
+  }
+];
   {
     q: "Which of the following is an example of a system call?",
     opts: ["Print statement", "File open request", "Variable declaration", "Comment line"],
