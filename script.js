@@ -1,3 +1,4 @@
+// --- State Variables ---
 let activeQuestions = [];
 let currentBatchQuestions = [];
 let currentIndex = 0;          // Index within current batch (0 to 49)
@@ -11,10 +12,18 @@ const STORAGE_KEY = "exam_simulator_active_state_v1";
 
 // --- Persistence Helpers ---
 
+function getQuestionsHash(questionsList) {
+  if (!questionsList || questionsList.length === 0) return "";
+  // Fingerprint length + early question content to auto-detect updates in questions.js
+  const sample = questionsList.slice(0, 5).map(q => q.q).join("");
+  return `${questionsList.length}_${sample.length}_${sample.slice(0, 30)}`;
+}
+
 function saveQuizState() {
   if (!activeQuestions || activeQuestions.length === 0) return;
 
   const quizState = {
+    questionsHash: getQuestionsHash(typeof originalQuestions !== "undefined" ? originalQuestions : []),
     activeQuestions: activeQuestions,
     batchStartIndex: batchStartIndex,
     currentIndex: currentIndex,
@@ -40,6 +49,15 @@ function loadQuizState() {
 
   try {
     const quizState = JSON.parse(savedData);
+
+    // Auto-detect if originalQuestions changed in questions.js
+    const currentHash = getQuestionsHash(typeof originalQuestions !== "undefined" ? originalQuestions : []);
+    if (quizState.questionsHash && quizState.questionsHash !== currentHash) {
+      console.log("[Exam Storage] Questions file updated. Clearing stale cache...");
+      clearQuizState();
+      return false;
+    }
+
     if (!quizState.activeQuestions || quizState.activeQuestions.length === 0) {
       console.log("[Exam Storage] Saved data was empty or invalid.");
       return false;
@@ -91,7 +109,7 @@ function prepareQuestions(questionsList) {
   });
 }
 
-// --- Quiz Logic ---
+// --- Quiz Core Logic ---
 
 function startQuiz(questionsList, forceRestart = false) {
   if (!questionsList || questionsList.length === 0) {
@@ -99,9 +117,9 @@ function startQuiz(questionsList, forceRestart = false) {
     return;
   }
 
-  // Prevent restarting if progress already exists (unless explicitly requested)
+  // Prevent restarting if progress already exists (unless forceRestart is true)
   if (!forceRestart && loadQuizState()) {
-    console.log("[Exam Storage] Found existing session, resuming instead of starting new quiz.");
+    console.log("[Exam Storage] Found valid existing session, resuming.");
     resumeQuizUI();
     return;
   }
@@ -203,7 +221,6 @@ function selectOption(selectedIndex) {
     }
   }
 
-  // Save state immediately after clicking an option
   saveQuizState();
   renderQuestion();
 }
@@ -257,6 +274,32 @@ function prevQuestion() {
     loadCurrentBatch();
   }
 }
+
+// --- Reset Quiz Logic ---
+
+function confirmResetQuiz() {
+  const isConfirmed = confirm(
+    "Are you sure you want to reset your quiz? All progress will be cleared and the latest questions will load."
+  );
+
+  if (isConfirmed) {
+    resetQuiz();
+  }
+}
+
+function resetQuiz() {
+  clearQuizState();
+
+  if (typeof originalQuestions !== "undefined" && originalQuestions.length > 0) {
+    startQuiz(originalQuestions, true);
+    console.log("[Exam Storage] Quiz reset manually with fresh questions.");
+  } else {
+    console.error("originalQuestions is missing. Reloading window...");
+    window.location.reload();
+  }
+}
+
+// --- Checkpoint & Results Logic ---
 
 function showCheckpointModal() {
   document.getElementById("quiz-view").classList.add("hidden");
