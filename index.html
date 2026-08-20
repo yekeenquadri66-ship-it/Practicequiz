@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practice Quiz</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="quiz-container">
+
+    <!-- 1. Quiz View -->
+    <div id="quiz-view">
+      <div class="header">
+        <div class="progress-bar-container">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <div class="stats">
+          <span id="question-counter">Question 1 of 100</span>
+          <span id="score-counter">Score: 0</span>
+        </div>
+      </div>
+
+      <h2 id="question-text" class="question-title"></h2>
+
+      <!-- In-App Warning Banner -->
+      <div id="warning-msg" class="warning-msg hidden">
+        <span>⚠️ Please select an answer before proceeding.</span>
+      </div>
+
+      <!-- Options Container -->
+      <div id="options-container" class="options-grid"></div>
+
+      <!-- Controls -->
+      <div class="quiz-controls">
+        <button id="reset-btn" class="danger-btn" type="button" onclick="confirmResetQuiz()">Reset Quiz</button>
+        
+        <div class="nav-actions">
+          <button id="prev-btn" class="secondary-btn" type="button" onclick="prevQuestion()">Previous</button>
+          <button id="next-btn" class="primary-btn" type="button" onclick="nextQuestion()">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Checkpoint View -->
+    <div id="checkpoint-view" class="results-screen hidden">
+      <h2>🎉 Checkpoint Reached!</h2>
+      <p id="checkpoint-text" style="color: var(--text-muted); margin: 16px 0;"></p>
+      
+      <div class="results-actions">
+        <button class="secondary-btn" type="button" onclick="repeatCurrentBatch()">🔁 Redo Same 50 Questions</button>
+        <button class="primary-btn" type="button" onclick="continueToNextBatch()">➡️ Continue to Next 50 Questions</button>
+      </div>
+    </div>
+
+    <!-- 3. Final Results View -->
+    <div id="results-view" class="results-screen hidden">
+      <h2>Quiz Completed!</h2>
+      <div id="final-score" class="results-score">0%</div>
+      <p id="results-summary"></p>
+      
+      <div class="results-actions">
+        <button id="retry-missed-btn" class="secondary-btn" type="button" onclick="retryMissedQuestions()">Retry Missed Questions</button>
+        <button class="primary-btn" type="button" onclick="restartFullQuiz()">Restart Full Quiz</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="Innoquestion.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
